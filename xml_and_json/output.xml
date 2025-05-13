@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<employees>
+	<employee>
+		<eid>101</eid>
+		<ename>king</ename>
+		<salary>80000</salary>
+	</employee>
+	<employee>
+		<eid>102</eid>
+		<ename>smith</ename>
+		<salary>40000</salary>
+	</employee>
+</employees>

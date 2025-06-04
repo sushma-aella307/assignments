@@ -1,3 +1,0 @@
-python strings
-python list
-python files

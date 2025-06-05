@@ -1,0 +1,4 @@
+Flask>=2.0
+pycryptodomex>=3.17
+matplotlib>=3.0
+seaborn>=0.12

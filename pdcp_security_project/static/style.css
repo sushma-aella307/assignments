@@ -1,0 +1,159 @@
+body {
+        font-family: sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+
+    h1, h2 {
+        color: #333;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 10px;
+    }
+
+    .container {
+        display: flex;
+        gap: 20px;
+    }
+
+    .controls, .stats, .logs-container, .visualization {
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .controls { flex-basis: 25%; }
+    .main-content { flex-basis: 75%; display: flex; flex-direction: column; gap: 20px;}
+
+    .stats { order: 1; }
+    .logs-container { order: 2; height: 300px; overflow-y: scroll; border: 1px solid #ddd; }
+    .visualization { order: 3; height: auto; min-height:150px; border: 1px solid #ddd; padding-top: 25px; position: relative;}
+
+    .log-entry {
+        padding: 2px 5px;
+        margin-bottom: 2px;
+        font-size: 0.9em;
+        border-bottom: 1px dotted #eee;
+    }
+    .log-INFO { color: #2a2a2a; }
+    .log-WARNING { color: #e67e22; font-weight: bold; }
+    .log-ERROR { color: #c0392b; font-weight: bold; }
+    .log-DEBUG { color: #7f8c8d; }
+
+    button {
+        padding: 10px 15px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    button:hover {
+        background-color: #2980b9;
+    }
+
+    label {
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+    input[type="number"], input[type="checkbox"] {
+        margin-bottom: 10px;
+        padding: 5px;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+    }
+    input[type="checkbox"] {
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+
+    .packet-lane {
+        display: flex; /* Will allow packets to flow horizontally */
+        flex-wrap: wrap; /* Allow wrapping if too many packets */
+        align-items: center;
+        padding: 10px 0;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #eee;
+        min-height: 40px; /* Ensure lane has some height */
+    }
+    .lane-label {
+        font-weight: bold;
+        margin-right: 15px;
+        min-width: 80px; /* Ensure labels align somewhat */
+        text-align: right;
+    }
+
+    .packet {
+        width: 25px; /* Adjust as needed */
+        height: 25px; /* Adjust as needed */
+        border: 1px solid #000;
+        margin: 2px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7em;
+        border-radius: 3px;
+        position: relative; /* For tooltip */
+        cursor: default;
+    }
+
+    .packet-tooltip {
+        visibility: hidden;
+        width: 180px;
+        background-color: #555;
+        color: #fff;
+        text-align: left;
+        border-radius: 6px;
+        padding: 8px;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%; /* Position above the packet */
+        left: 50%;
+        margin-left: -90px; /* Center the tooltip */
+        opacity: 0;
+        transition: opacity 0.3s;
+        font-size: 0.9em;
+        line-height: 1.4;
+    }
+
+    .packet:hover .packet-tooltip {
+        visibility: visible;
+        opacity: 1;
+    }
+
+
+    /* Packet Status Colors */
+    .status-TX_Prepared { background-color: #e0e0e0; border-color: #bdbdbd; } /* Greyish */
+    .status-Channel_Transit, .status-Channel_Output, .status-Channel_Flushed { background-color: #bbdefb; border-color: #90caf9; } /* Light Blue */
+    .status-Channel_Tampered { background-color: #ffcc80; border-color: #ffb74d; animation: pulse-orange 1s infinite;} /* Orange */
+    .status-Channel_Corrupted { background-color: #fff59d; border-color: #fff176; } /* Yellow */
+    .status-Channel_Lost { background-color: #ef9a9a; border-color: #e57373; opacity: 0.5; } /* Light Red, faded */
+    .status-RX_Received { background-color: #c8e6c9; border-color: #a5d6a7; } /* Light Green */
+    .status-RX_Buffered { background-color: #d1c4e9; border-color: #b39ddb; } /* Light Purple */
+    .status-Delivered { background-color: #4CAF50; color: white; border-color: #388E3C; animation: pulse-green 1s infinite;} /* Green */
+    .status-Discarded_IntegrityFailure { background-color: #f44336; color: white; border-color: #d32f2f; animation: pulse-red 1s infinite;} /* Red */
+    .status-Discarded_IntegrityFailure_Short { background-color: #f44336; color: white; border-color: #d32f2f; }
+    .status-Discarded_IntegrityFailure_NoKey { background-color: #f44336; color: white; border-color: #d32f2f; }
+    .status-Discarded_Duplicate { background-color: #FF9800; color: white; border-color: #F57C00;} /* Amber */
+    .status-Discarded_ChannelCorruption { background-color: #795548; color: white; border-color: #5D4037;} /* Brown */
+    .status-Discarded_DecipherError_NoKey { background-color: #607D8B; color: white; border-color: #455A64;} /* Blue Grey */
+
+    @keyframes pulse-red {
+        0% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(244, 67, 54, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0); }
+    }
+    @keyframes pulse-green {
+        0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+    }
+    @keyframes pulse-orange {
+        0% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(255, 152, 0, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0); }
+    }

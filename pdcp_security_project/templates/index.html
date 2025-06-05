@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5G PDCP Integrity Simulation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>5G NR PDCP Integrity Protection Simulation</h1>
+    <div class="container">
+        <div class="controls">
+            <h2>Controls & Parameters</h2>
+            <!-- ... (form controls remain the same) ... -->
+             <label for="numSdus">Number of SDUs:</label>
+            <input type="number" id="numSdus" value="50" min="1" max="500">
+
+            <label for="sduSize">SDU Size (bytes):</label>
+            <input type="number" id="sduSize" value="100" min="10" max="1000">
+            
+            <div>
+                <input type="checkbox" id="integrityEnabled" checked>
+                <label for="integrityEnabled" style="display: inline;">Enable Integrity Protection (DRB)</label>
+            </div>
+            <div>
+                <input type="checkbox" id="cipheringEnabled" checked>
+                <label for="cipheringEnabled" style="display: inline;">Enable Ciphering (DRB)</label>
+            </div>
+             <div>
+                <input type="checkbox" id="keyMismatch">
+                <label for="keyMismatch" style="display: inline;">Simulate Integrity Key Mismatch</label>
+            </div>
+
+            <label for="lossRate">Loss Rate (0.0-1.0):</label>
+            <input type="number" id="lossRate" value="0.01" min="0" max="1" step="0.01">
+
+            <label for="tamperingRate">Malicious Tampering Rate (0.0-1.0):</label>
+            <input type="number" id="tamperingRate" value="0.05" min="0" max="1" step="0.01">
+            
+            <label for="corruptionRate">Random Corruption Rate (0.0-1.0):</label>
+            <input type="number" id="corruptionRate" value="0.01" min="0" max="1" step="0.01">
+
+            <button id="startButton">Start Simulation</button>
+        </div>
+
+        <div class="main-content">
+            <div class="stats">
+                <h2>Simulation Statistics</h2>
+                <div id="statsContainer"><p>Run simulation to see stats.</p></div>
+            </div>
+            
+            <!-- ADDED PLOT SECTION -->
+            <div class="visualization" id="plotSection">
+                <h2>Summary Plot</h2>
+                <div id="plotContainer">
+                    <p>Plot will appear here after simulation completes.</p>
+                </div>
+            </div>
+            <!-- END PLOT SECTION -->
+
+            <div class="visualization"> <!-- Existing packet flow visualization -->
+                <h2>Packet Flow Visualization</h2>
+                <div class="packet-lane" id="txLane">
+                    <span class="lane-label">TX Output:</span>
+                    <div id="txLanePackets"></div>
+                </div>
+                <div class="packet-lane" id="channelLane">
+                    <span class="lane-label">Channel:</span>
+                    <div id="channelLanePackets"></div>
+                </div>
+                <div class="packet-lane" id="rxLane">
+                    <span class="lane-label">RX Input:</span>
+                    <div id="rxLanePackets"></div>
+                </div>
+                 <div class="packet-lane" id="deliveredLane">
+                    <span class="lane-label">Delivered:</span>
+                    <div id="deliveredLanePackets"></div>
+                </div>
+            </div>
+
+            <div class="logs-container">
+                <h2>Simulation Logs</h2>
+                <div id="logs"><p>Simulation logs will appear here...</p></div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5G NR PDCP Ciphering Simulation</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/chart.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>5G NR PDCP Ciphering Simulation</h1>
+        <div class="input-section">
+            <textarea id="plaintext" placeholder="Enter plaintext to encrypt"></textarea>
+            <button onclick="runSimulation()">Simulate</button>
+        </div>
+        <div class="results">
+            <div class="card">
+                <h3>Plaintext</h3>
+                <p id="plaintext-result"></p>
+            </div>
+            <div class="card">
+                <h3>Ciphertext</h3>
+                <p id="ciphertext-result"></p>
+            </div>
+            <div class="card">
+                <h3>Deciphered</h3>
+                <p id="deciphered-result"></p>
+            </div>
+            <div class="card">
+                <h3>Eavesdrop Attempt</h3>
+                <p id="eavesdrop-result"></p>
+            </div>
+        </div>
+        <canvas id="cipheringChart" width="400" height="200"></canvas>
+    </div>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
